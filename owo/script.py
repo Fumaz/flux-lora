@@ -8,7 +8,7 @@ def replace_in_config(config_path):
         r'export MODEL_NAME=.*': 'export MODEL_NAME=black-forest-labs/FLUX.1-dev',
         r'export TRACKER_RUN_NAME=.*': 'export TRACKER_RUN_NAME=docker',
         r'export MAX_NUM_STEPS=.*': 'export MAX_NUM_STEPS=' + os.environ.get('MAX_NUM_STEPS'),
-        r'export OUTPUT_DIR=.*': 'export OUTPUT_DIR=/usr/src/app/output/models',
+        r'export OUTPUT_DIR=.*': 'export OUTPUT_DIR=/usr/src/app/output',
         r'export PUSH_TO_HUB=.*': 'export PUSH_TO_HUB=true',
         r'export TRACKER_PROJECT_NAME=.*': 'export TRACKER_PROJECT_NAME=' + os.environ.get('TRACKER_PROJECT_NAME'),
         r'export HUB_MODEL_NAME=.*': 'export HUB_MODEL_NAME=' + os.environ.get('HUB_MODEL_NAME'),
