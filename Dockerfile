@@ -19,10 +19,10 @@ WORKDIR /workspace/SimpleTuner
 
 RUN python3.11 -m venv .venv
 RUN source .venv/bin/activate
-RUN pip install -U poetry pip openai --no-cache-dir
+RUN pip install -U poetry pip openai
 RUN poetry install --no-root
 RUN pip uninstall -y deepspeed bitsandbytes diffusers
-RUN pip install -y --no-cache-dir git+https://github.com/huggingface/diffusers
+RUN pip install -y git+https://github.com/huggingface/diffusers
 
 RUN mkdir -p /workspace/hf_home
 
