@@ -1,7 +1,7 @@
-source .venv/bin/activate
-python3.11 script.py
+source /workspace/SimpleTuner/.venv/bin/activate
+python3.11 /usr/src/app/script.py
 
 wget $DATASET_URL -O dataset.zip
-unzip dataset.zip -d dataset
+unzip dataset.zip -d /workspace/SimpleTuner/dataset
 
-bash train.sh
+bash /workspace/SimpleTuner/train.sh

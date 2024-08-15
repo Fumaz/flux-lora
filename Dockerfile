@@ -21,34 +21,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Set up workspace
-WORKDIR /workspace
+WORKDIR /usr/src/app
 
-# Clone SimpleTuner repository
-RUN git clone --depth 1 --branch release https://github.com/bghira/SimpleTuner.git
-
-WORKDIR /workspace/SimpleTuner
-
-# Create HF_HOME directory
-RUN mkdir -p /workspace/hf_home
-
-# Copy models (if needed)
-COPY models/* /workspace/hf_home/models/
-
-# Set up Python environment
-RUN python3.11 -m venv .venv \
-    && . .venv/bin/activate \
-    && pip install --no-cache-dir -U pip poetry \
-    && poetry config virtualenvs.create false \
-    && poetry install --no-root \
-    && pip uninstall -y deepspeed bitsandbytes diffusers \
-    && pip install --no-cache-dir git+https://github.com/huggingface/diffusers
+RUN mkdir -p ./configs
 
 # Copy additional files
-COPY owo/* /workspace/SimpleTuner/
-COPY configs/* /workspace/SimpleTuner/config/
+COPY owo/* .
+COPY configs/* ./configs
 
 # Set permissions for start script
-RUN chmod +x /workspace/SimpleTuner/start.sh
+RUN chmod +x /usr/src/app/start.sh
 
 # Set the entrypoint
-CMD ["/workspace/SimpleTuner/start.sh"]
+CMD ["/usr/src/app/start.sh"]
