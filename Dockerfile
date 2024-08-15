@@ -1,6 +1,14 @@
+# Start from the PyTorch base image
 FROM runpod/pytorch:2.0.1-py3.10-cuda11.8.0-devel-ubuntu22.04
 
-RUN apt-get update && apt-get install -y \
+# Set environment variables
+ENV PYTHONUNBUFFERED=1 \
+    DEBIAN_FRONTEND=noninteractive \
+    HF_HOME=/workspace/hf_home \
+    TRANSFORMERS_CACHE=/workspace/hf_home
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
     python3.11 \
     python3.11-venv \
     nvidia-cuda-toolkit \
@@ -9,33 +17,38 @@ RUN apt-get update && apt-get install -y \
     git \
     curl \
     wget \
+    && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+# Set up workspace
 WORKDIR /workspace
 
-RUN git clone --branch=release https://github.com/bghira/SimpleTuner.git
+# Clone SimpleTuner repository
+RUN git clone --depth 1 --branch release https://github.com/bghira/SimpleTuner.git
 
 WORKDIR /workspace/SimpleTuner
 
+# Create HF_HOME directory
 RUN mkdir -p /workspace/hf_home
 
-ENV HF_HOME=/workspace/hf_home
-ENV TRANSFORMERS_CACHE=/workspace/hf_home
-
+# Copy models (if needed)
 COPY models/* /workspace/hf_home/models/
 
-RUN python3.11 -m venv .venv
-RUN source .venv/bin/activate
-RUN pip install -U poetry pip openai
-RUN poetry install --no-root
-RUN pip uninstall -y deepspeed bitsandbytes diffusers
-RUN pip install git+https://github.com/huggingface/diffusers
+# Set up Python environment
+RUN python3.11 -m venv .venv \
+    && . .venv/bin/activate \
+    && pip install --no-cache-dir -U pip poetry \
+    && poetry config virtualenvs.create false \
+    && poetry install --no-root \
+    && pip uninstall -y deepspeed bitsandbytes diffusers \
+    && pip install --no-cache-dir git+https://github.com/huggingface/diffusers
 
-# Set up HF_TOKEN and WANDB_API_KEY
-
+# Copy additional files
 COPY owo/* .
-COPY configs/* ./config
+COPY configs/* ./config/
 
+# Set permissions for start script
 RUN chmod +x start.sh
 
-CMD ["bash", "start.sh"]
+# Set the entrypoint
+CMD ["./start.sh"]
