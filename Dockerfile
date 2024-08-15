@@ -34,5 +34,6 @@ COPY models/* /workspace/hf_home/models/
 # Set up HF_TOKEN and WANDB_API_KEY
 
 COPY owo/* .
+COPY configs/* ./config
 
 CMD ["bash", "start.sh"]
