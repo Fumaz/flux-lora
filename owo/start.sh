@@ -7,4 +7,5 @@ unzip -o dataset.zip -d /workspace/SimpleTuner/dataset
 cd /workspace/SimpleTuner
 export HF_HOME=/workspace/hf_home
 export TRANSFORMERS_CACHE=/workspace/hf_home
+huggingface-cli login --token $HF_TOKEN
 bash train.sh
