@@ -13,7 +13,7 @@
     "instance_root_dir": "/usr/src/app/output/dataset",
     "instance_data_dir": "/usr/src/app/output/dataset",
     "cache_dir_vae": "/usr/src/app/output/vae-cache",
-    "text_embeds": "alt-embed-cache",
+    "text_embeds": "dataset-embed-cache",
     "preserve_data_backend_cache": true
   },
   {
