@@ -5,4 +5,6 @@ wget $DATASET_URL -O dataset.zip
 unzip -o dataset.zip -d /workspace/SimpleTuner/dataset
 
 cd /workspace/SimpleTuner
+export HF_HOME=/workspace/hf_home
+export TRANSFORMERS_CACHE=/workspace/hf_home
 bash train.sh
