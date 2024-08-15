@@ -8,4 +8,7 @@ cd /workspace/SimpleTuner
 export HF_HOME=/workspace/hf_home
 export TRANSFORMERS_CACHE=/workspace/hf_home
 huggingface-cli login --token $HF_TOKEN
+mkdir -p /root/.cache/huggingface
+touch /root/.cache/huggingface/token
+echo $HF_TOKEN > /root/.cache/huggingface/token
 bash train.sh
