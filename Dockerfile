@@ -17,19 +17,19 @@ RUN git clone --branch=release https://github.com/bghira/SimpleTuner.git
 
 WORKDIR /workspace/SimpleTuner
 
-RUN python3.11 -m venv .venv
-RUN source .venv/bin/activate
-RUN pip install -U poetry pip openai
-RUN poetry install --no-root
-RUN pip uninstall -y deepspeed bitsandbytes diffusers
-RUN pip install -y git+https://github.com/huggingface/diffusers
-
 RUN mkdir -p /workspace/hf_home
 
 ENV HF_HOME=/workspace/hf_home
 ENV TRANSFORMERS_CACHE=/workspace/hf_home
 
 COPY models/* /workspace/hf_home/models/
+
+RUN python3.11 -m venv .venv
+RUN source .venv/bin/activate
+RUN pip install -U poetry pip openai
+RUN poetry install --no-root
+RUN pip uninstall -y deepspeed bitsandbytes diffusers
+RUN pip install git+https://github.com/huggingface/diffusers
 
 # Set up HF_TOKEN and WANDB_API_KEY
 
