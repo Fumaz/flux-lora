@@ -44,11 +44,11 @@ RUN python3.11 -m venv .venv \
     && pip install --no-cache-dir git+https://github.com/huggingface/diffusers
 
 # Copy additional files
-COPY owo/* .
-COPY configs/* ./config/
+COPY owo/* /workspace/SimpleTuner/
+COPY configs/* /workspace/SimpleTuner/config/
 
 # Set permissions for start script
-RUN chmod +x start.sh
+RUN chmod +x /workspace/SimpleTuner/start.sh
 
 # Set the entrypoint
-CMD ["./start.sh"]
+CMD ["/workspace/SimpleTuner/start.sh"]
