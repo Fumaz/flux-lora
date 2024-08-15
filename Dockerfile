@@ -33,6 +33,7 @@ RUN mkdir -p /workspace/hf_home
 
 # Copy models (if needed)
 COPY models/* /workspace/hf_home/models/
+RUN ls /workspace/hf_home/models && sleep 10
 RUN mv /workspace/hf_home/models/hub/* /workspace/hf_home/models
 
 # Set up Python environment
