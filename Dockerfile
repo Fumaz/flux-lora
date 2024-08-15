@@ -36,4 +36,6 @@ RUN pip install git+https://github.com/huggingface/diffusers
 COPY owo/* .
 COPY configs/* ./config
 
+RUN chmod +x start.sh
+
 CMD ["bash", "start.sh"]
