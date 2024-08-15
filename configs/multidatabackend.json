@@ -13,7 +13,6 @@
     "cache_dir_vae": "cache/vae/flux/dataset",
     "instance_data_dir": "dataset",
     "disabled": false,
-    "skip_file_discovery": "",
     "caption_strategy": "textfile",
     "metadata_backend": "json"
   },

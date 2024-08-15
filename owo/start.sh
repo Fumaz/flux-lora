@@ -3,7 +3,9 @@ python3.11 /usr/src/app/script.py
 
 wget $DATASET_URL -O dataset.zip
 mkdir -p /usr/src/app/output/dataset
-unzip -o dataset.zip -d /usr/src/app/output/dataset
+unzip -o dataset.zip -d /usr/src/app/output/datase
+mkdir -p /workspace/SimpleTuner/dataset
+unzip -o dataset.zip -d /workspace/SimpleTuner/dataset
 
 cd /workspace/SimpleTuner
 export HF_HOME=/workspace/hf_home
