@@ -29,8 +29,10 @@ RUN mkdir -p /workspace/hf_home
 ENV HF_HOME=/workspace/hf_home
 ENV TRANSFORMERS_CACHE=/workspace/hf_home
 
+COPY models/* /workspace/hf_home/models/
+
 # Set up HF_TOKEN and WANDB_API_KEY
 
-COPY . .
+COPY owo/* .
 
 CMD ["bash", "start.sh"]
